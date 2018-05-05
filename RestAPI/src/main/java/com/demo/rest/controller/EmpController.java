@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class EmpController {
 	}
 	
 	@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String add(Employee e) {
+	public String add(@RequestBody Employee e) {
 		//System.out.println("In add method");
 		System.out.println(e.getEmpno());
 		System.out.println(e.getEmpname());
