@@ -45,6 +45,7 @@ public class EmpController {
 		return empService.getAllEmp();
 	}
 	
+	
 	@GetMapping(value = "/get/{EmpId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Employee getEmployee(@PathVariable(name = "EmpId") int id) {
 		return empService.getEmp(id);
