@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -30,7 +31,7 @@ public class Users {
 	private String password;
 	@Column(name = "ACTIVE")
 	private int active;
-	@ManyToMany(targetEntity = Roles.class,cascade = {CascadeType.ALL})
+	@ManyToMany(targetEntity = Roles.class,cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
 	@JoinTable(name  = "USER_ROLES", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
 	private Set<Roles> roles;
 	
@@ -85,16 +86,16 @@ public class Users {
 	
 	public Users() {}
 	
-	public Users(int user_id, String user_name, String first_name, String last_name, String email, String password,
-			int active) {
+	public Users(Users users) {
 		super();
-		this.user_id = user_id;
-		this.username = user_name;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.password = password;
-		this.active = active;
+		this.user_id = users.getUser_id();
+		this.username = users.getUser_name();
+		this.first_name = users.getFirst_name();
+		this.last_name = users.getLast_name();
+		this.email = users.getEmail();
+		this.password = users.getPassword();
+		this.active = users.getActive();
+		this.roles = users.getRoles();
 	}
 	@Override
 	public String toString() {
